@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find your IRONIX fit with the Fit Intelligence interactive prototype.">
+  <title>Fit Intelligence Prototype — IRONIX</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Navigation & Demo Status -->
+  <header class="topbar">
+    <a class="wordmark" href="#" aria-label="IRONIX Home">IRONIX<span>.</span></a>
+    <span class="top-note">FIT INTELLIGENCE / PROTOTYPE DEMO</span>
+  </header>
+
+  <main class="shell">
+    <!-- Hero / Introduction -->
+    <section class="intro">
+      <p class="eyebrow">THE KEEPER / RIBBED ATHLETIC TANK</p>
+      <h1>YOUR FIT.<br><em>FIGURED OUT.</em></h1>
+      <p class="lede">
+        Eliminate sizing guesswork. Enter your chest measurement and fit preference below to test the intelligent sizing recommendation algorithm.
+      </p>
+    </section>
+
+    <!-- Product Summary Bar -->
+    <section class="product-strip" aria-label="Product Information">
+      <div class="product-mark" aria-hidden="true">IX</div>
+      <div class="product-details">
+        <strong>THE KEEPER</strong>
+        <p>220 GSM · 95% Cotton / 5% Elastane · Athletic Fitted Rib</p>
+      </div>
+      <div class="price">₹1,249</div>
+    </section>
+
+    <!-- Step 1: User Measurements & Inputs -->
+    <section class="panel" aria-labelledby="step-1-title">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">STEP 01 / YOUR MEASUREMENTS</p>
+          <h2 id="step-1-title">Let's find your size.</h2>
+        </div>
+        <span class="step" aria-label="Step 1 of 2">STEP 1 OF 2</span>
+      </div>
+
+      <div class="field-grid">
+        <!-- Chest Measurement Input -->
+        <label for="chest">
+          Chest Circumference
+          <span class="hint">Measure around the fullest part of your chest with tape held level.</span>
+          <div class="measure">
+            <input 
+              id="chest" 
+              type="number" 
+              min="28" 
+              max="60" 
+              step="0.5" 
+              placeholder="e.g. 39" 
+              value="39"
+              aria-describedby="chest-helper"
+            >
+            <span class="unit" aria-hidden="true">INCHES</span>
+          </div>
+        </label>
+
+        <!-- Fit Preference Selection -->
+        <label for="fit">
+          Fit Preference
+          <span class="hint">How do you prefer The Keeper to fit against your torso?</span>
+          <select id="fit">
+            <option value="regular" selected>Regular Athletic (Snug, intended fit)</option>
+            <option value="relaxed">Relaxed (+1 size up for breathing room)</option>
+            <option value="close">Close to Body (Tighter compression feel)</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="chest-helper" class="helper">
+        💡 <strong>Quick tip:</strong> If you're using a tailor's tape, keep it flat against your chest without pulling it taut.
+      </div>
+
+      <button id="recommend" type="button" class="button primary">
+        CALCULATE MY SIZE <span>↗</span>
+      </button>
+
+      <!-- Input Validation Error Message -->
+      <p id="error" class="error" role="alert" aria-live="polite"></p>
+    </section>
+
+    <!-- Step 2: Recommendation Output (Initially hidden until calculated) -->
+    <section id="result" class="panel result hidden" aria-live="polite" aria-labelledby="step-2-title">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">STEP 02 / RECOMMENDED FIT</p>
+          <h2 id="step-2-title">Your Recommended Size</h2>
+        </div>
+        <span class="confidence">DETERMINISTIC LOGIC</span>
+      </div>
+
+      <div class="result-main">
+        <div class="size-orb" id="size" aria-label="Recommended size">M</div>
+        <div class="result-info">
+          <p class="eyebrow">BEST MATCH</p>
+          <h3 id="result-title">SIZE M</h3>
+          <p id="reason" class="result-explanation"></p>
+        </div>
+      </div>
+
+      <!-- Boundary Tie-Breaker Explanation -->
+      <div id="caveat" class="caveat" role="note"></div>
+
+      <!-- Size Scale Comparison Chips -->
+      <div class="size-row-label">Size spectrum comparison:</div>
+      <div class="size-row" id="size-row" aria-label="Available size ranges"></div>
+
+      <!-- Action Buttons -->
+      <div class="actions">
+        <button id="add" type="button" class="button primary">
+          ADD TO CART (DEMO) <span>↗</span>
+        </button>
+        <button id="reset" type="button" class="button secondary">
+          CHANGE MEASUREMENTS
+        </button>
+      </div>
+
+      <p id="cart-message" class="cart-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Reference Section: Public Size Chart Analysis -->
+    <section class="chart" aria-labelledby="chart-title">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">ANALYSIS / PUBLIC STORE CHART</p>
+          <h2 id="chart-title">The Keeper Size Matrix</h2>
+        </div>
+        <span class="step">ALL SIZES IN INCHES</span>
+      </div>
+
+      <p class="chart-desc">
+        Below are the chest & length ranges currently published on the IRONIX product page. Notice the overlapping boundaries (38" and 40–42"):
+      </p>
+
+      <div class="chart-table" role="table" aria-label="Published Size Chart">
+        <div class="chart-row chart-label" role="row">
+          <span role="columnheader">SIZE</span>
+          <span role="columnheader">CHEST RANGE</span>
+          <span role="columnheader">GARMENT LENGTH</span>
+          <span role="columnheader">BOUNDARY STATUS</span>
+        </div>
+        <div class="chart-row" role="row">
+          <b role="cell">S</b>
+          <span role="cell">36–38 in</span>
+          <span role="cell">26 in</span>
+          <span role="cell" class="boundary-tag">Overlaps at 38"</span>
+        </div>
+        <div class="chart-row" role="row">
+          <b role="cell">M</b>
+          <span role="cell">38–40 in</span>
+          <span role="cell">27 in</span>
+          <span role="cell" class="boundary-tag">Overlaps at 38" & 40"</span>
+        </div>
+        <div class="chart-row" role="row">
+          <b role="cell">L</b>
+          <span role="cell">40–42 in</span>
+          <span role="cell">28 in</span>
+          <span role="cell" class="boundary-tag">Overlaps at 40" & 42"</span>
+        </div>
+        <div class="chart-row" role="row">
+          <b role="cell">XL</b>
+          <span role="cell">40–44 in</span>
+          <span role="cell">28 in</span>
+          <span role="cell" class="boundary-tag">Overlaps 40–42" with L</span>
+        </div>
+      </div>
+
+      <div class="fine-card">
+        <strong>Why Fit Intelligence is Needed:</strong>
+        <p class="fine">
+          When ranges overlap, shoppers get stuck on boundaries. Fit Intelligence resolves this transparently: it defaults to the smaller athletic fit for a secure feel, or cleanly shifts to the larger size if the shopper chooses "Relaxed". In production, these rules will be calibrated with IRONIX's precise garment ease specifications.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <span>IRONIX / BUILT TO TRAIN. MADE TO LIVE IN.</span>
+      <span>FIT INTELLIGENCE ASSESSMENT PROTOTYPE</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

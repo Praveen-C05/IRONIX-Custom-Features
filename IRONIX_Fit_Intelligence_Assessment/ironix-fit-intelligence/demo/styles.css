@@ -1,0 +1,588 @@
+/* ==========================================================================
+   IRONIX Fit Intelligence — Prototype Demo Stylesheet
+   Theme: High-contrast Dark Athletic Modern
+   ========================================================================== */
+
+:root {
+  --bg: #090a0b;
+  --panel: #121416;
+  --panel-card: #181b1e;
+  --line: #292d30;
+  --muted: #92999d;
+  --white: #f4f5f3;
+  --lime: #d5ff45;
+  --lime-glow: rgba(213, 255, 69, 0.15);
+  --danger: #ff7777;
+  --danger-bg: rgba(255, 119, 119, 0.1);
+  --radius: 2px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--white);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Top Navigation
+   -------------------------------------------------------------------------- */
+.topbar {
+  height: 72px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(6vw, 24px);
+  background: rgba(9, 10, 11, 0.85);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.wordmark {
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.wordmark span {
+  color: var(--lime);
+}
+
+.top-note,
+.eyebrow,
+.step,
+.confidence,
+footer {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Layout Shell
+   -------------------------------------------------------------------------- */
+.shell {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section
+   -------------------------------------------------------------------------- */
+.intro {
+  max-width: 650px;
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  color: var(--lime);
+  margin: 0 0 12px;
+}
+
+.intro h1 {
+  font-size: clamp(44px, 8.5vw, 80px);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  margin: 0;
+  font-weight: 900;
+}
+
+.intro h1 em {
+  font-style: normal;
+  color: var(--lime);
+}
+
+.lede {
+  color: #aeb4b7;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 540px;
+  margin-top: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   Product Strip
+   -------------------------------------------------------------------------- */
+.product-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+
+.product-mark {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: var(--lime);
+  color: #111;
+  font-weight: 950;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.product-details strong {
+  letter-spacing: 0.08em;
+  font-size: 14px;
+}
+
+.product-details p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.price {
+  margin-left: auto;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   Panels & Inputs
+   -------------------------------------------------------------------------- */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 32px;
+  margin: 24px 0;
+  border-radius: var(--radius);
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.panel h2,
+.chart h2 {
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  margin: 4px 0 0;
+  font-weight: 800;
+}
+
+.step {
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.field-grid label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  display: flex;
+  flex-direction: column;
+}
+
+.hint {
+  display: block;
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 11px;
+  margin: 6px 0 10px;
+  min-height: 32px;
+}
+
+.measure {
+  display: flex;
+  border: 1px solid #3a4044;
+  background: #0b0d0e;
+  transition: border-color 0.15s ease;
+}
+
+.measure:focus-within {
+  border-color: var(--lime);
+}
+
+.measure input,
+.field-grid select {
+  width: 100%;
+  background: #0b0d0e;
+  border: 1px solid #3a4044;
+  color: var(--white);
+  padding: 14px;
+  font-size: 15px;
+  outline: none;
+  font-family: inherit;
+}
+
+.measure input {
+  border: 0;
+}
+
+.measure .unit {
+  padding: 14px 16px;
+  color: var(--lime);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  background: #14171a;
+  border-left: 1px solid #292d30;
+}
+
+.field-grid select {
+  height: 48px;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.field-grid select:focus {
+  border-color: var(--lime);
+}
+
+.helper {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 16px 0 24px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid #4a5156;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.button {
+  border: 0;
+  padding: 16px 22px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 48px;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.button span {
+  float: right;
+  margin-left: 18px;
+}
+
+.primary {
+  background: var(--lime);
+  color: #111;
+}
+
+.primary:hover {
+  background: #e4ff83;
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--line);
+}
+
+.secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #555;
+}
+
+.error {
+  color: var(--danger);
+  background: var(--danger-bg);
+  padding: 10px 14px;
+  font-size: 13px;
+  border-left: 2px solid var(--danger);
+  margin: 16px 0 0;
+}
+
+.error:empty {
+  display: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Result Display
+   -------------------------------------------------------------------------- */
+.result-main {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 0 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.size-orb {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--lime);
+  color: #111;
+  font-size: 42px;
+  font-weight: 950;
+  flex-shrink: 0;
+  box-shadow: 0 0 24px var(--lime-glow);
+}
+
+.result-info h3 {
+  font-size: 26px;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.result-explanation {
+  color: #cbd0c0;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.caveat {
+  border-left: 3px solid var(--lime);
+  padding: 12px 16px;
+  background: #181d13;
+  color: #d8decd;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 20px 0;
+}
+
+.size-row-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.size-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.size-chip {
+  flex: 1;
+  text-align: center;
+  padding: 14px 6px;
+  border: 1px solid var(--line);
+  background: #0d0f11;
+  color: var(--muted);
+  font-size: 13px;
+  position: relative;
+  transition: all 0.15s ease;
+}
+
+.size-chip strong {
+  display: block;
+  font-size: 15px;
+}
+
+.size-chip small {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.size-chip.active {
+  border-color: var(--lime);
+  color: var(--lime);
+  background: #171f11;
+  box-shadow: 0 0 12px var(--lime-glow);
+}
+
+.size-chip.active small {
+  color: #c4d989;
+}
+
+.chip-badge {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  margin-top: 6px;
+  color: var(--lime);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cart-message {
+  font-size: 13px;
+  color: var(--lime);
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #171f11;
+  border-left: 2px solid var(--lime);
+}
+
+.cart-message:empty {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Chart Reference Section
+   -------------------------------------------------------------------------- */
+.chart {
+  padding: 32px 0;
+}
+
+.chart-desc {
+  color: #aeb4b7;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.chart-table {
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr 2fr;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  align-items: center;
+}
+
+.chart-row:last-child {
+  border-bottom: none;
+}
+
+.chart-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  background: #0d0f11;
+}
+
+.chart-row b {
+  color: var(--lime);
+  font-size: 14px;
+}
+
+.boundary-tag {
+  color: #e0a352;
+  font-size: 11px;
+}
+
+.fine-card {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.fine-card strong {
+  display: block;
+  font-size: 13px;
+  color: var(--lime);
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+
+.fine {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 680px) {
+  .shell {
+    padding: 36px 16px 24px;
+  }
+  .panel {
+    padding: 20px;
+  }
+  .field-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .actions {
+    flex-direction: column;
+  }
+  .actions .button {
+    width: 100%;
+  }
+  .product-strip {
+    flex-wrap: wrap;
+  }
+  .price {
+    margin-left: 0;
+    width: 100%;
+  }
+  .intro h1 {
+    font-size: 46px;
+  }
+  .size-orb {
+    width: 76px;
+    height: 76px;
+    font-size: 34px;
+  }
+  .chart-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 12px;
+  }
+  .boundary-tag {
+    display: none;
+  }
+  footer {
+    flex-direction: column;
+  }
+}

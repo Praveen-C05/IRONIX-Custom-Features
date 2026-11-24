@@ -1,0 +1,39 @@
+{% comment %}
+  IRONIX SEO & Discovery Snippet
+  Use this only if the theme does not already provide equivalent metadata.
+  Avoid duplicate title, description, canonical or structured-data tags.
+{% endcomment %}
+
+{% if request.page_type == 'index' %}
+  <title>
+    IRONIX | Premium Ribbed Vests & Streetwear in India
+  </title>
+
+  <meta
+    name="description"
+    content="Explore IRONIX ribbed tank tops and premium everyday streetwear designed for comfort, movement and a confident fit."
+  >
+{% endif %}
+
+{% comment %}
+  Descriptive image alt text helper example:
+{% endcomment %}
+{% if product.featured_image %}
+  {{
+    product.featured_image
+    | image_url: width: 1200
+    | image_tag:
+      loading: 'lazy',
+      alt: product.title | append: ' - IRONIX product image'
+  }}
+{% endif %}
+
+{% comment %}
+  Accessible icon link helper example:
+{% endcomment %}
+<a
+  href="{{ routes.cart_url }}"
+  aria-label="View shopping cart"
+>
+  {% render 'icon-cart' %}
+</a>

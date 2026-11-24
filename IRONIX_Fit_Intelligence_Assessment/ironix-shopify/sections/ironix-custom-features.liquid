@@ -1,0 +1,322 @@
+<section class="ironix-features" id="ironix-features">
+
+  <!-- 1. FIT INTELLIGENCE -->
+  <div class="ix-card" id="fit-intelligence">
+    <span class="ix-label">IRONIX FIT INTELLIGENCE</span>
+    <h2>Find Your Perfect Fit</h2>
+    <p>
+      Get a size recommendation based on your measurements
+      and preferred clothing fit.
+    </p>
+
+    <form id="fitForm">
+      <label for="chest">Chest Measurement (inches)</label>
+      <input
+        type="number"
+        id="chest"
+        min="28"
+        max="60"
+        step="0.5"
+        required
+      >
+
+      <label for="waist">Waist Measurement (inches)</label>
+      <input
+        type="number"
+        id="waist"
+        min="24"
+        max="60"
+        step="0.5"
+        required
+      >
+
+      <label for="height">Height (cm)</label>
+      <input
+        type="number"
+        id="height"
+        min="120"
+        max="220"
+        required
+      >
+
+      <label for="fitPreference">Preferred Fit</label>
+      <select id="fitPreference">
+        <option value="body">Body Hugging</option>
+        <option value="regular" selected>Regular Athletic</option>
+        <option value="relaxed">Relaxed</option>
+      </select>
+
+      <button type="submit">
+        Find My Size
+      </button>
+    </form>
+
+    <div id="fitResult" aria-live="polite"></div>
+  </div>
+
+  <!-- 2. BEHAVIOUR-BASED RECOMMENDATIONS -->
+  <div class="ix-card">
+    <span class="ix-label">PERSONALISED DISCOVERY</span>
+    <h2>Recommended For You</h2>
+    <p>
+      Discover products related to your shopping interests.
+    </p>
+
+    <div
+      id="recommendedProducts"
+      class="ix-product-grid"
+    >
+      Loading recommendations...
+    </div>
+  </div>
+
+  <!-- 3. PERSONALISED FIT GUIDANCE -->
+  <div class="ix-card">
+    <span class="ix-label">FIT GUIDE</span>
+    <h2>Understand Your Fit</h2>
+
+    <div class="ix-fit-options">
+      <div>
+        <h3>Body Hugging</h3>
+        <p>
+          A close-fitting style that follows your body's shape.
+        </p>
+      </div>
+
+      <div>
+        <h3>Regular Athletic</h3>
+        <p>
+          A balanced fit designed for everyday comfort and movement.
+        </p>
+      </div>
+
+      <div>
+        <h3>Relaxed</h3>
+        <p>
+          A looser fit offering additional room and comfort.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. CART ASSISTANCE -->
+  <div class="ix-card" id="cart-assistance">
+    <span class="ix-label">SHOPPING ASSISTANCE</span>
+    <h2>Need Help Completing Your Order?</h2>
+    <p>
+      Check your selected size, delivery information
+      and exchange policy before completing checkout.
+    </p>
+
+    <a href="/pages/faqs">
+      View Frequently Asked Questions
+    </a>
+    <br><br>
+    <a href="/policies/refund-policy">
+      View Return and Exchange Policy
+    </a>
+  </div>
+
+  <!-- 5. CUSTOMER FEEDBACK INTELLIGENCE -->
+  <div class="ix-card">
+    <span class="ix-label">CUSTOMER FEEDBACK</span>
+    <h2>Help Us Improve</h2>
+
+    {% form 'contact', id: 'IronixFeedback' %}
+      <input
+        type="hidden"
+        name="contact[subject]"
+        value="IRONIX Customer Product Feedback"
+      >
+
+      <label for="feedbackEmail">Email</label>
+      <input
+        type="email"
+        id="feedbackEmail"
+        name="contact[email]"
+        required
+      >
+
+      <label for="feedbackType">Feedback Category</label>
+      <select
+        id="feedbackType"
+        name="contact[Feedback Category]"
+      >
+        <option>Size and Fit</option>
+        <option>Product Quality</option>
+        <option>Delivery Experience</option>
+        <option>Website Experience</option>
+        <option>Other</option>
+      </select>
+
+      <label for="feedbackMessage">Your Feedback</label>
+      <textarea
+        id="feedbackMessage"
+        name="contact[body]"
+        rows="5"
+        maxlength="2000"
+        required
+      ></textarea>
+
+      <button type="submit">
+        Submit Feedback
+      </button>
+    {% endform %}
+  </div>
+
+</section>
+
+<!-- IRONIX PROPOSED CUSTOM SOLUTIONS -->
+<section class="ix-solutions">
+
+  <div class="ix-solutions-header">
+    <span class="ix-label">CUSTOMER EXPERIENCE INTELLIGENCE</span>
+    <h2>Designed Around Your Shopping Experience</h2>
+    <p>
+      Discover products, understand your fit and shop with confidence.
+    </p>
+  </div>
+
+  <!-- 1. FIT INTELLIGENCE -->
+  <article class="ix-solution">
+    <span class="ix-priority">HIGH PRIORITY</span>
+    <h3>1. Fit Intelligence – Smart Size Recommendation</h3>
+    <p>
+      Customers enter chest measurement, waist, height and
+      preferred fit. The tool recommends a size and explains why.
+    </p>
+    <a href="#fit-intelligence">
+      Try Smart Size Recommendation
+    </a>
+  </article>
+
+  <!-- 2. BEHAVIOUR-BASED RECOMMENDATIONS -->
+  <article class="ix-solution">
+    <h3>2. Behaviour-Based Product Recommendations</h3>
+    <p>
+      Suggest relevant products and combinations based on
+      product views, category interests and shopping activity.
+    </p>
+    <div id="behaviourRecommendations">
+      <p>Discover products based on your interests.</p>
+    </div>
+  </article>
+
+  <!-- 3. PERSONALISED FIT GUIDANCE -->
+  <article class="ix-solution">
+    <h3>3. Personalised Fit Guidance</h3>
+    <p>
+      Explain the differences between body-hugging,
+      regular athletic and relaxed fits.
+    </p>
+    <div class="ix-fit-guidance">
+      <button type="button" data-fit-guide="body">
+        Body Hugging
+      </button>
+      <button type="button" data-fit-guide="regular">
+        Regular Athletic
+      </button>
+      <button type="button" data-fit-guide="relaxed">
+        Relaxed
+      </button>
+      <p id="fitGuidanceResult" aria-live="polite">
+        Select a fit preference to understand the difference.
+      </p>
+    </div>
+  </article>
+
+  <!-- 4. CART ABANDONMENT ASSISTANCE -->
+  <article class="ix-solution">
+    <h3>4. Cart Abandonment Assistance</h3>
+    <p>
+      Identify where shoppers leave the purchase journey
+      and provide relevant shopping assistance.
+    </p>
+    <div id="cartBehaviourHelp" style="display:none;">
+      <p>
+        Need help with sizing, delivery or exchanges?
+      </p>
+      <a href="/pages/faqs">
+        Get Shopping Assistance
+      </a>
+    </div>
+  </article>
+
+  <!-- 5. CUSTOMER FEEDBACK INTELLIGENCE -->
+  <article class="ix-solution">
+    <h3>5. Customer Feedback Intelligence</h3>
+    <p>
+      Analyse product reviews, size-related questions
+      and exchange reasons to identify recurring problems.
+    </p>
+    <a href="#IronixFeedback">
+      Share Your Feedback
+    </a>
+  </article>
+
+</section>
+
+<!-- SUCCESS MEASUREMENT -->
+<section class="ix-measurement">
+
+  <span class="ix-label">PERFORMANCE MEASUREMENT</span>
+  <h2>How We Measure Success</h2>
+
+  <div class="ix-metric-grid">
+    <div class="ix-metric">
+      <h3>Fit Recommendation Usage</h3>
+      <p>Measure how many shoppers use the size recommendation tool.</p>
+    </div>
+
+    <div class="ix-metric">
+      <h3>Add-to-Cart Rate</h3>
+      <p>Measure add-to-cart activity after product recommendations.</p>
+    </div>
+
+    <div class="ix-metric">
+      <h3>Product Conversion</h3>
+      <p>Compare product purchases before and after feature adoption.</p>
+    </div>
+
+    <div class="ix-metric">
+      <h3>Cart Abandonment</h3>
+      <p>Measure the percentage of carts that do not reach checkout completion.</p>
+    </div>
+
+    <div class="ix-metric">
+      <h3>Size-Related Exchanges</h3>
+      <p>Track returns and exchanges caused by incorrect size selection.</p>
+    </div>
+
+    <div class="ix-metric">
+      <h3>Customer Support Queries</h3>
+      <p>Monitor recurring questions about fit, delivery and products.</p>
+    </div>
+  </div>
+
+  <p class="ix-disclaimer">
+    These are proposed solutions based on the website audit.
+    Actual customer browsing and purchasing data from Shopify
+    Analytics or other analytics tools is required for accurate
+    behavioural personalisation.
+  </p>
+
+</section>
+
+{{ 'ironix-custom.css' | asset_url | stylesheet_tag }}
+<script
+  src="{{ 'ironix-custom.js' | asset_url }}"
+  defer
+></script>
+
+{% schema %}
+{
+  "name": "IRONIX Custom Features",
+  "settings": [],
+  "presets": [
+    {
+      "name": "IRONIX Custom Features"
+    }
+  ]
+}
+{% endschema %}

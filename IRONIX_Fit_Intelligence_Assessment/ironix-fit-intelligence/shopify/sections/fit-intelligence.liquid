@@ -1,0 +1,92 @@
+{% comment %}
+  IRONIX Fit Intelligence — OS 2.0 section
+  IMPORTANT: confirm product-specific body measurement ranges with the merchandising/fit team.
+  This section maps customer chest input to size variants. Measurements remain client-side.
+{% endcomment %}
+{% if product %}
+<section class="ix-fit" data-ix-fit data-product-id="{{ product.id }}">
+  <div class="ix-fit__head"><p>FIT INTELLIGENCE / IRONIX</p><h2>Find your fit.</h2><span>Personalised size guidance</span></div>
+  <div class="ix-fit__fields">
+    <label for="ix-chest-{{ section.id }}">Chest measurement <small>inches</small></label>
+    <input id="ix-chest-{{ section.id }}" type="number" min="28" max="60" step="0.5" placeholder="e.g. 39">
+    <label for="ix-fit-{{ section.id }}">Preferred fit</label>
+    <select id="ix-fit-{{ section.id }}"><option value="regular">Regular athletic</option><option value="relaxed">More room</option><option value="close">Closer fit</option></select>
+  </div>
+  <button type="button" class="ix-fit__button" data-ix-recommend>RECOMMEND MY SIZE ↗</button>
+  <p class="ix-fit__error" data-ix-error role="alert"></p>
+  <div class="ix-fit__result" data-ix-result hidden>
+    <p class="ix-fit__label">YOUR RECOMMENDED SIZE</p><strong data-ix-size></strong><p data-ix-reason></p>
+    <button type="button" class="ix-fit__button" data-ix-add>ADD SIZE TO CART ↗</button>
+    <p data-ix-cart role="status"></p>
+  </div>
+  <script type="application/json" data-ix-variants>
+    [
+      {% for variant in product.variants %}
+        {"id":{{ variant.id | json }},"available":{{ variant.available | json }},"title":{{ variant.title | json }},"options":{{ variant.options | json }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  </script>
+  <script>
+  (() => {
+    const root = document.currentScript.closest('[data-ix-fit]');
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized = 'true';
+    const variants = JSON.parse(root.querySelector('[data-ix-variants]').textContent);
+    const sizeOptionIndex = {{ product.options | json }}.findIndex(x => /size/i.test(x));
+    const sizeNames = ['S','M','L','XL'];
+    const ranges = [{s:'S',min:36,max:38},{s:'M',min:38,max:40},{s:'L',min:40,max:42},{s:'XL',min:40,max:44}];
+    let chosenVariant = null;
+    const $ = s => root.querySelector(s);
+    $('[data-ix-recommend]').addEventListener('click', () => {
+      const chest = Number($('#ix-chest-{{ section.id }}').value);
+      const fit = $('#ix-fit-{{ section.id }}').value;
+      $('[data-ix-error]').textContent = '';
+      if (!Number.isFinite(chest) || chest < 28 || chest > 60) { $('[data-ix-error]').textContent='Enter a chest measurement between 28 and 60 inches.'; return; }
+      if (chest < 36 || chest > 44) { $('[data-ix-error]').textContent='The published chart covers 36–44 inches. Please contact IRONIX for a manual fit recommendation.'; return; }
+      let i = ranges.findIndex(r => chest >= r.min && chest <= r.max);
+      if (i < 0) i = chest < 36 ? 0 : 3;
+      if (fit === 'relaxed' && i < 3) i++;
+      if (fit === 'close' && i > 0 && chest <= ranges[i].min + .5) i--;
+      let match = variants.find(v => sizeOptionIndex >= 0 && String(v.options[sizeOptionIndex]).toUpperCase() === ranges[i].s && v.available);
+      if (!match) {
+        // Edge case: recommended size is sold out; find the next available size up.
+        match = variants.find(v => sizeOptionIndex >= 0 && sizeNames.indexOf(String(v.options[sizeOptionIndex]).toUpperCase()) > i && v.available);
+      }
+      if (!match) { $('[data-ix-error]').textContent='That size is currently unavailable. Please check the size selector for live stock.'; $('[data-ix-result]').hidden=true; return; }
+      chosenVariant = match;
+      $('[data-ix-size]').textContent = ranges[i].s;
+      $('[data-ix-reason]').textContent = `Based on ${chest}" chest and your fit preference. We selected the closest available size.`;
+      $('[data-ix-result]').hidden = false;
+    });
+    $('[data-ix-add]').addEventListener('click', async () => {
+      if (!chosenVariant) return;
+      $('[data-ix-cart]').textContent = 'Adding to cart…';
+      try {
+        const response = await fetch(`${window.Shopify.routes.root}cart/add.js`, {
+          method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({items:[{id:chosenVariant.id,quantity:1}]})
+        });
+        if (!response.ok) throw new Error('Cart request failed');
+        await response.json();
+        $('[data-ix-cart]').textContent = 'Added. Your cart is ready.';
+        document.dispatchEvent(new CustomEvent('cart:refresh'));
+      } catch (e) { $('[data-ix-cart]').textContent = 'Could not add this size. Please use the standard size selector.'; }
+    });
+  })();
+  </script>
+  <style>
+    .ix-fit{background:#101214;color:#f4f5f3;border:1px solid #303538;padding:24px;margin:24px 0;font-family:inherit}
+    .ix-fit__head p,.ix-fit__label{color:#d5ff45;font-size:10px;letter-spacing:.15em;font-weight:800}
+    .ix-fit__head h2{font-size:28px;margin:8px 0}.ix-fit__head span,.ix-fit small{color:#a0a7aa;font-size:12px}
+    .ix-fit__fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
+    .ix-fit__fields label{font-size:12px;font-weight:700}.ix-fit input,.ix-fit select{background:#080a0b;color:#fff;border:1px solid #444;padding:13px;width:100%;min-width:0}
+    .ix-fit__button{background:#d5ff45;color:#111;border:0;padding:15px 18px;font-weight:900;cursor:pointer}
+    .ix-fit__error{color:#ff7777;font-size:12px}.ix-fit__result{border-top:1px solid #333;margin-top:20px;padding-top:18px}
+    .ix-fit__result strong{font-size:42px;color:#d5ff45}.ix-fit__result p{font-size:13px;line-height:1.5}
+    @media(max-width:600px){.ix-fit__fields{grid-template-columns:1fr}}
+  </style>
+</section>
+{% endif %}
+{% schema %}
+{"name":"IRONIX Fit Intelligence","target":"section","settings":[],"presets":[{"name":"IRONIX Fit Intelligence"}]}
+{% endschema %}

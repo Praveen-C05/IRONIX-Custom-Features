@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IRONIX Custom Features Demo — Shopify Online Store 2.0 Integration Preview">
+  <title>IRONIX Custom Features — Shopify OS 2.0 Demo</title>
+  <link rel="stylesheet" href="assets/ironix-custom.css">
+  <style>
+    /* Demo environment shell */
+    body {
+      margin: 0;
+      background: #090a0b;
+      color: #f4f5f3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+    }
+    .demo-topbar {
+      height: 64px;
+      border-bottom: 1px solid #292d30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(5vw, 20px);
+      background: #0c0e10;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-logo {
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+    }
+    .demo-logo span {
+      color: #d5ff45;
+    }
+    .demo-badge {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: #d5ff45;
+      font-weight: 700;
+      background: rgba(213, 255, 69, 0.1);
+      padding: 6px 12px;
+      border: 1px solid rgba(213, 255, 69, 0.3);
+      border-radius: 4px;
+    }
+    .demo-intro {
+      max-width: 1150px;
+      margin: 40px auto 10px;
+      padding: 0 20px;
+    }
+    .demo-intro h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      margin: 0 0 12px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+    .demo-intro p {
+      color: #aeb4b7;
+      font-size: 16px;
+      max-width: 720px;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .demo-toolbar {
+      max-width: 1150px;
+      margin: 20px auto 0;
+      padding: 16px 20px;
+      background: #14171a;
+      border: 1px solid #2a3036;
+      border-radius: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .demo-toolbar strong {
+      color: #d5ff45;
+      margin-right: 8px;
+    }
+    .demo-pill {
+      background: #22272c;
+      color: #fff;
+      border: 1px solid #3c444c;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .demo-pill:hover {
+      background: #343c44;
+      border-color: #d5ff45;
+      color: #d5ff45;
+    }
+    .demo-footer {
+      border-top: 1px solid #292d30;
+      padding: 30px 20px;
+      text-align: center;
+      color: #777;
+      font-size: 12px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body data-product-id="ironix-the-keeper-black" data-product-handle="ironix-rib-tank-black">
+
+  <!-- Header -->
+  <header class="demo-topbar">
+    <a href="#" class="demo-logo">IRONIX<span>.</span></a>
+    <span class="demo-badge">SHOPIFY OS 2.0 INTEGRATION PREVIEW</span>
+  </header>
+
+  <!-- Page Introduction -->
+  <div class="demo-intro">
+    <h1>Custom Feature Suite</h1>
+    <p>
+      An interactive preview of the 5 proposed customer experience features for IRONIX. Built for Shopify Online Store 2.0 using Liquid, standard browser APIs, and privacy-first local behaviour tracking.
+    </p>
+  </div>
+
+  <!-- Interactive Test Toolbar -->
+  <div class="demo-toolbar">
+    <strong>Simulate Category Browsing:</strong>
+    <a href="javascript:void(0)" class="demo-pill" data-ix-category="Ribbed Tanks">Browse Ribbed Tanks</a>
+    <a href="javascript:void(0)" class="demo-pill" data-ix-category="Gym Essentials">Browse Gym Essentials</a>
+    <a href="javascript:void(0)" class="demo-pill" data-ix-category="Combo Packs">Browse Combo Packs</a>
+    <button type="button" class="demo-pill" onclick="localStorage.clear(); location.reload();" style="margin-left:auto; background:#361c1c; border-color:#843535; color:#ff9999;">Reset Local Demo Data</button>
+  </div>
+
+  <!-- MAIN CUSTOM FEATURES SECTION -->
+  <section class="ironix-features" id="ironix-features">
+
+    <!-- 1. FIT INTELLIGENCE -->
+    <div class="ix-card" id="fit-intelligence">
+      <span class="ix-label">IRONIX FIT INTELLIGENCE</span>
+      <h2>Find Your Perfect Fit</h2>
+      <p>
+        Get a size recommendation based on your measurements and preferred clothing fit.
+      </p>
+
+      <form id="fitForm">
+        <label for="chest">Chest Measurement (inches)</label>
+        <input
+          type="number"
+          id="chest"
+          min="28"
+          max="60"
+          step="0.5"
+          placeholder="e.g. 39"
+          value="39"
+          required
+        >
+
+        <label for="waist">Waist Measurement (inches)</label>
+        <input
+          type="number"
+          id="waist"
+          min="24"
+          max="60"
+          step="0.5"
+          placeholder="e.g. 32"
+          value="32"
+          required
+        >
+
+        <label for="height">Height (cm)</label>
+        <input
+          type="number"
+          id="height"
+          min="120"
+          max="220"
+          placeholder="e.g. 178"
+          value="178"
+          required
+        >
+
+        <label for="fitPreference">Preferred Fit</label>
+        <select id="fitPreference">
+          <option value="body">Body Hugging (Compression feel)</option>
+          <option value="regular" selected>Regular Athletic (Intended silhouette)</option>
+          <option value="relaxed">Relaxed (+1 size room)</option>
+        </select>
+
+        <button type="submit">
+          Find My Size
+        </button>
+      </form>
+
+      <div id="fitResult" aria-live="polite"></div>
+    </div>
+
+    <!-- 2. BEHAVIOUR-BASED RECOMMENDATIONS -->
+    <div class="ix-card">
+      <span class="ix-label">PERSONALISED DISCOVERY</span>
+      <h2>Recommended For You</h2>
+      <p>
+        Discover products related to your shopping interests.
+      </p>
+
+      <!-- Pre-populated fallback cards for standalone demo preview -->
+      <div id="recommendedProducts" class="ix-product-grid">
+        <a class="ix-product" href="#fit-intelligence">
+          <div style="background:#222; border-radius:8px; aspect-ratio:4/5; display:grid; place-items:center; color:#666; font-weight:700;">THE KEEPER (BLACK)</div>
+          <h3>The Keeper - Athletic Tank</h3>
+          <p>₹1,249</p>
+        </a>
+        <a class="ix-product" href="#fit-intelligence">
+          <div style="background:#222; border-radius:8px; aspect-ratio:4/5; display:grid; place-items:center; color:#666; font-weight:700;">THE KEEPER (CHARCOAL)</div>
+          <h3>The Keeper - Charcoal Rib</h3>
+          <p>₹1,249</p>
+        </a>
+        <a class="ix-product" href="#fit-intelligence">
+          <div style="background:#222; border-radius:8px; aspect-ratio:4/5; display:grid; place-items:center; color:#666; font-weight:700;">THE KEEPER (OLIVE)</div>
+          <h3>The Keeper - Military Olive</h3>
+          <p>₹1,249</p>
+        </a>
+        <a class="ix-product" href="#fit-intelligence">
+          <div style="background:#222; border-radius:8px; aspect-ratio:4/5; display:grid; place-items:center; color:#666; font-weight:700;">THE KEEPER COMBO</div>
+          <h3>The Keeper 2-Pack Combo</h3>
+          <p>₹2,299</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. PERSONALISED FIT GUIDANCE -->
+    <div class="ix-card">
+      <span class="ix-label">FIT GUIDE</span>
+      <h2>Understand Your Fit</h2>
+
+      <div class="ix-fit-options">
+        <div>
+          <h3>Body Hugging</h3>
+          <p>
+            A close-fitting style that follows your body's shape.
+          </p>
+        </div>
+
+        <div>
+          <h3>Regular Athletic</h3>
+          <p>
+            A balanced fit designed for everyday comfort and movement.
+          </p>
+        </div>
+
+        <div>
+          <h3>Relaxed</h3>
+          <p>
+            A looser fit offering additional room and comfort.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. CART ASSISTANCE -->
+    <div class="ix-card" id="cart-assistance">
+      <span class="ix-label">SHOPPING ASSISTANCE</span>
+      <h2>Need Help Completing Your Order?</h2>
+      <p>
+        Check your selected size, delivery information and exchange policy before completing checkout.
+      </p>
+
+      <a href="javascript:alert('Demo link: Frequently Asked Questions');">
+        View Frequently Asked Questions
+      </a>
+      <br><br>
+      <a href="javascript:alert('Demo link: 48-Hour Refund and Exchange Policy');">
+        View Return and Exchange Policy
+      </a>
+    </div>
+
+    <!-- 5. CUSTOMER FEEDBACK INTELLIGENCE -->
+    <div class="ix-card">
+      <span class="ix-label">CUSTOMER FEEDBACK</span>
+      <h2>Help Us Improve</h2>
+
+      <form id="IronixFeedback" onsubmit="event.preventDefault(); alert('Thank you! Feedback received for demo.');">
+        <label for="feedbackEmail">Email</label>
+        <input
+          type="email"
+          id="feedbackEmail"
+          placeholder="your.email@example.com"
+          required
+        >
+
+        <label for="feedbackType">Feedback Category</label>
+        <select id="feedbackType">
+          <option>Size and Fit</option>
+          <option>Product Quality</option>
+          <option>Delivery Experience</option>
+          <option>Website Experience</option>
+          <option>Other</option>
+        </select>
+
+        <label for="feedbackMessage">Your Feedback</label>
+        <textarea
+          id="feedbackMessage"
+          rows="5"
+          maxlength="2000"
+          placeholder="Share your experience with fit, comfort, or delivery..."
+          required
+        ></textarea>
+
+        <button type="submit">
+          Submit Feedback
+        </button>
+      </form>
+    </div>
+
+  </section>
+
+  <!-- IRONIX PROPOSED CUSTOM SOLUTIONS -->
+  <section class="ix-solutions">
+
+    <div class="ix-solutions-header">
+      <span class="ix-label">CUSTOMER EXPERIENCE INTELLIGENCE</span>
+      <h2>Designed Around Your Shopping Experience</h2>
+      <p>
+        Discover products, understand your fit and shop with confidence.
+      </p>
+    </div>
+
+    <!-- 1. FIT INTELLIGENCE -->
+    <article class="ix-solution">
+      <span class="ix-priority">HIGH PRIORITY</span>
+      <h3>1. Fit Intelligence – Smart Size Recommendation</h3>
+      <p>
+        Customers enter chest measurement, waist, height and preferred fit. The tool recommends a size and explains why.
+      </p>
+      <a href="#fit-intelligence">
+        Try Smart Size Recommendation
+      </a>
+    </article>
+
+    <!-- 2. BEHAVIOUR-BASED RECOMMENDATIONS -->
+    <article class="ix-solution">
+      <h3>2. Behaviour-Based Product Recommendations</h3>
+      <p>
+        Suggest relevant products and combinations based on product views, category interests and shopping activity.
+      </p>
+      <div id="behaviourRecommendations">
+        <p>Discover products based on your interests.</p>
+      </div>
+    </article>
+
+    <!-- 3. PERSONALISED FIT GUIDANCE -->
+    <article class="ix-solution">
+      <h3>3. Personalised Fit Guidance</h3>
+      <p>
+        Explain the differences between body-hugging, regular athletic and relaxed fits.
+      </p>
+      <div class="ix-fit-guidance">
+        <button type="button" data-fit-guide="body">
+          Body Hugging
+        </button>
+        <button type="button" data-fit-guide="regular">
+          Regular Athletic
+        </button>
+        <button type="button" data-fit-guide="relaxed">
+          Relaxed
+        </button>
+        <p id="fitGuidanceResult" aria-live="polite">
+          Select a fit preference to understand the difference.
+        </p>
+      </div>
+    </article>
+
+    <!-- 4. CART ABANDONMENT ASSISTANCE -->
+    <article class="ix-solution">
+      <h3>4. Cart Abandonment Assistance</h3>
+      <p>
+        Identify where shoppers leave the purchase journey and provide relevant shopping assistance.
+      </p>
+      <div id="cartBehaviourHelp" style="display:block; padding:15px; background:#1b1e22; border-radius:6px; margin-top:10px;">
+        <p style="margin:0 0 10px 0;">
+          Need help with sizing, delivery or exchanges?
+        </p>
+        <a href="javascript:alert('Demo link: Frequently Asked Questions');">
+          Get Shopping Assistance
+        </a>
+      </div>
+    </article>
+
+    <!-- 5. CUSTOMER FEEDBACK INTELLIGENCE -->
+    <article class="ix-solution">
+      <h3>5. Customer Feedback Intelligence</h3>
+      <p>
+        Analyse product reviews, size-related questions and exchange reasons to identify recurring problems.
+      </p>
+      <a href="#IronixFeedback">
+        Share Your Feedback
+      </a>
+    </article>
+
+  </section>
+
+  <!-- SUCCESS MEASUREMENT -->
+  <section class="ix-measurement">
+
+    <span class="ix-label">PERFORMANCE MEASUREMENT</span>
+    <h2>How We Measure Success</h2>
+
+    <div class="ix-metric-grid">
+      <div class="ix-metric">
+        <h3>Fit Recommendation Usage</h3>
+        <p>Measure how many shoppers use the size recommendation tool.</p>
+      </div>
+
+      <div class="ix-metric">
+        <h3>Add-to-Cart Rate</h3>
+        <p>Measure add-to-cart activity after product recommendations.</p>
+      </div>
+
+      <div class="ix-metric">
+        <h3>Product Conversion</h3>
+        <p>Compare product purchases before and after feature adoption.</p>
+      </div>
+
+      <div class="ix-metric">
+        <h3>Cart Abandonment</h3>
+        <p>Measure the percentage of carts that do not reach checkout completion.</p>
+      </div>
+
+      <div class="ix-metric">
+        <h3>Size-Related Exchanges</h3>
+        <p>Track returns and exchanges caused by incorrect size selection.</p>
+      </div>
+
+      <div class="ix-metric">
+        <h3>Customer Support Queries</h3>
+        <p>Monitor recurring questions about fit, delivery and products.</p>
+      </div>
+    </div>
+
+    <p class="ix-disclaimer">
+      These are proposed solutions based on the website audit. Actual customer browsing and purchasing data from Shopify Analytics or other analytics tools is required for accurate behavioural personalisation.
+    </p>
+
+  </section>
+
+  <footer class="demo-footer">
+    IRONIX STOREFRONT ASSESSMENT · SHOPIFY ONLINE STORE 2.0 CUSTOM FEATURES PREVIEW
+  </footer>
+
+  <script src="assets/ironix-custom.js"></script>
+</body>
+</html>

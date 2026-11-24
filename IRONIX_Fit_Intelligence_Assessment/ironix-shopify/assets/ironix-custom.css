@@ -1,0 +1,262 @@
+/* ==========================================================================
+   IRONIX Custom Storefront Features Stylesheet
+   ========================================================================== */
+
+.ironix-features {
+  max-width: 1150px;
+  margin: 50px auto;
+  padding: 20px;
+  display: grid;
+  gap: 25px;
+  color: inherit;
+}
+
+.ix-card {
+  padding: 30px;
+  border: 1px solid #333;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+}
+
+.ix-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #aaa;
+  font-weight: bold;
+}
+
+.ix-card h2 {
+  font-size: 28px;
+  margin: 12px 0;
+}
+
+.ix-card p {
+  line-height: 1.7;
+  color: #ccc;
+}
+
+.ix-card label {
+  display: block;
+  margin: 15px 0 7px;
+}
+
+.ix-card input,
+.ix-card select,
+.ix-card textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.ix-card button {
+  margin-top: 18px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ix-card button:hover {
+  background: #ccc;
+}
+
+.ix-result {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid #777;
+  border-radius: 8px;
+}
+
+.ix-fit-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.ix-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ix-product {
+  color: #fff;
+  text-decoration: none;
+}
+
+.ix-product img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.ix-product h3 {
+  font-size: 16px;
+  margin: 10px 0 4px;
+}
+
+.ix-cart-assistance {
+  margin: 20px 0;
+  padding: 20px;
+  background: #222;
+  color: white;
+  border-radius: 8px;
+}
+
+.ix-cart-assistance a {
+  color: white;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   IRONIX PROPOSED CUSTOM SOLUTIONS & SUCCESS MEASUREMENT
+   ========================================================================== */
+
+.ix-solutions,
+.ix-measurement {
+  max-width: 1150px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.ix-solutions-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.ix-solutions-header h2,
+.ix-measurement h2 {
+  font-size: 32px;
+}
+
+.ix-solution {
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #444;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+}
+
+.ix-solution h3 {
+  font-size: 21px;
+}
+
+.ix-solution p {
+  color: #ccc;
+  line-height: 1.7;
+}
+
+.ix-priority {
+  display: inline-block;
+  padding: 6px 10px;
+  background: #e5e5e5;
+  color: #111;
+  font-size: 11px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.ix-solution a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.ix-fit-guidance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.ix-fit-guidance button {
+  padding: 12px 18px;
+  border: 1px solid #777;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ix-fit-guidance button:hover {
+  background: #333;
+}
+
+#fitGuidanceResult {
+  flex-basis: 100%;
+  margin-top: 10px;
+  color: #d5ff45;
+  font-weight: 500;
+}
+
+.ix-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.ix-metric {
+  padding: 20px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background: #111;
+}
+
+.ix-metric h3 {
+  font-size: 17px;
+  margin-top: 0;
+}
+
+.ix-metric p {
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.ix-disclaimer {
+  margin-top: 25px;
+  padding: 18px;
+  border-left: 3px solid #888;
+  color: #aaa;
+  line-height: 1.7;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .ix-fit-options {
+    grid-template-columns: 1fr;
+  }
+
+  .ix-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ix-card {
+    padding: 20px;
+  }
+
+  .ix-metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ix-solutions-header h2,
+  .ix-measurement h2 {
+    font-size: 25px;
+  }
+
+  .ix-solution {
+    padding: 18px;
+  }
+}
